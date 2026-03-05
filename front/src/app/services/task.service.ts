@@ -7,7 +7,7 @@ import { Task } from '../models/task';
   providedIn: 'root'
 })
 export class TaskService {
-  private apiUrl = 'http://localhost:8080/task/api/tasks';
+  private apiUrl = 'http://mongodb:8080/task/api/tasks';
 
   constructor(private http: HttpClient) {}
 

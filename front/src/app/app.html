@@ -1,0 +1,84 @@
+<div class="container">
+  <h1>{{ title() }}</h1>
+  
+  <!-- Add Task Button -->
+  <button class="btn btn-primary" (click)="toggleForm()">
+    {{ showForm() ? 'Cancel' : 'Add New Task' }}
+  </button>
+  
+  <!-- Create Task Form -->
+  @if (showForm()) {
+    <div class="form-card">
+      <h3>Create New Task</h3>
+      <input 
+        type="text" 
+        [(ngModel)]="newTask.title" 
+        placeholder="Task title"
+        class="form-input"
+      />
+      <input 
+        type="text" 
+        [(ngModel)]="newTask.description" 
+        placeholder="Task description"
+        class="form-input"
+      />
+      <button class="btn btn-success" (click)="createTask()">Create</button>
+    </div>
+  }
+  
+  <!-- Edit Task Form -->
+  @if (editingTask) {
+    <div class="form-card">
+      <h3>Edit Task</h3>
+      <input 
+        type="text" 
+        [(ngModel)]="editingTask.title" 
+        placeholder="Task title"
+        class="form-input"
+      />
+      <input 
+        type="text" 
+        [(ngModel)]="editingTask.description" 
+        placeholder="Task description"
+        class="form-input"
+      />
+      <label>
+        <input 
+          type="checkbox" 
+          [(ngModel)]="editingTask.completed"
+        />
+        Completed
+      </label>
+      <div class="button-group">
+        <button class="btn btn-success" (click)="updateTask()">Update</button>
+        <button class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+      </div>
+    </div>
+  }
+  
+  <!-- Task List -->
+  <div class="task-list">
+    <h2>Tasks ({{ tasks().length }})</h2>
+    @if (tasks().length === 0) {
+      <p class="empty-message">No tasks yet. Add one above!</p>
+    }
+    @for (task of tasks(); track task.id) {
+      <div class="task-card" [class.completed]="task.completed">
+        <div class="task-info">
+          <h3>{{ task.title }}</h3>
+          <p>{{ task.description }}</p>
+          <span class="status">{{ task.completed ? '✅ Completed' : '⏳ Pending' }}</span>
+        </div>
+        <div class="task-actions">
+          <button class="btn btn-sm" (click)="toggleCompleted(task)">
+            {{ task.completed ? 'Mark Incomplete' : 'Mark Complete' }}
+          </button>
+          <button class="btn btn-sm btn-edit" (click)="startEdit(task)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteTask(task.id!)">Delete</button>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+<router-outlet />

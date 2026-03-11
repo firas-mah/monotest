@@ -7,7 +7,7 @@ import { Task } from '../models/task';
   providedIn: 'root'
 })
 export class TaskService {
-  private apiUrl = 'http://localhost:8081/task/api/tasks';
+  private apiUrl = 'http://back:8081/task/api/tasks';
 
   constructor(private http: HttpClient) {}
 

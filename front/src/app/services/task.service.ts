@@ -7,7 +7,7 @@ import { Task } from '../models/task';
   providedIn: 'root'
 })
 export class TaskService {
-  private apiUrl = 'user-179404771-t7-back.firas.itransform365.com';
+  private apiUrl = 'https://user-179404771-t9-front.firas.itransform365.com/task/api/tasks';
 
   constructor(private http: HttpClient) {}
 
